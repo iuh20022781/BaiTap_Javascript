@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+		body {
+			font-size: 20px;
+			text-align: center;
+		}
+		button {
+			font-size: 20px;
+			padding: 10px 20px;
+			margin: 10px;
+			border-radius: 5px;
+			background-color: lightgray;
+			border: none;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+    <h1>Máy tính cầm tay</h1>
+	<div>
+		<input type="text" id="input" disabled>
+	</div>
+	<div>
+		<button onclick="pressNumber(7)">7</button>
+		<button onclick="pressNumber(8)">8</button>
+		<button onclick="pressNumber(9)">9</button>
+		<button onclick="pressOperator('+')">+</button>
+	</div>
+	<div>
+		<button onclick="pressNumber(4)">4</button>
+		<button onclick="pressNumber(5)">5</button>
+		<button onclick="pressNumber(6)">6</button>
+		<button onclick="pressOperator('-')">-</button>
+	</div>
+	<div>
+		<button onclick="pressNumber(1)">1</button>
+		<button onclick="pressNumber(2)">2</button>
+		<button onclick="pressNumber(3)">3</button>
+		<button onclick="pressOperator('*')">*</button>
+	</div>
+	<div>
+		<button onclick="pressNumber(0)">0</button>
+		<button onclick="pressDecimal()">.</button>
+		<button onclick="calculate()">=</button>
+		<button onclick="pressOperator('/')">/</button>
+	</div>
+	<div>
+		<button onclick="clearInput()">Xóa</button>
+	</div>
+	<script type="text/javascript">
+		let input = document.getElementById('input');
+		let operator = '';
+		let firstNumber = null;
+		let secondNumber = null;
+		let result = null;
+
+		function pressNumber(number) {
+			if (input.value === '0') {
+				input.value = number;
+			} else {
+				input.value += number;
+			}
+		}
+
+		function pressDecimal() {
+			if (!input.value.includes('.')) {
+				input.value += '.';
+			}
+		}
+
+		function pressOperator(op) {
+			operator = op;
+			firstNumber = Number(input.value);
+			input.value = '0';
+		}
+
+		function calculate() {
+			secondNumber = Number(input.value);
+			switch (operator) {
+				case '+':
+					result = firstNumber + secondNumber;
+					break;
+				case '-':
+					result = firstNumber - secondNumber;
+					break;
+				case '*':
+					result = firstNumber * secondNumber;
+					break;
+				case '/':
+					result = firstNumber / secondNumber;
+					break;
+				default:
+					break;
+			}
+			input.value = result;
+			firstNumber = result;
+			secondNumber = null;
+			operator = '';
+			result = null;
+		}
+
+		function clearInput() {
+			input.value = '0';
+			operator = '';
+			firstNumber = null;
+			secondNumber = null;
+			result = null;
+		}
+	</script>
+</body>
+</html>

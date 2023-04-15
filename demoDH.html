@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20022781 Nguyễn Tấn Phát</title>
+    <link rel="stylesheet" href="../Tuan_07/code.js">
+    <style type="text/css">
+		body {
+			font-size: 40px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+    <p id="clock">00:00:00</p>
+	<button onclick="start()">Bắt đầu</button>
+	<button onclick="stop()">Dừng lại</button>
+	<button onclick="reset()">Đặt lại</button>
+	<script type="text/javascript">
+		let time = 0;
+		let timer;
+
+		function displayTime() {
+			let hours = Math.floor(time / 3600);
+			let minutes = Math.floor((time % 3600) / 60);
+			let seconds = Math.floor(time % 60);    
+
+			if (hours < 10) {
+				hours = "0" + hours;
+			}
+
+			if (minutes < 10) {
+				minutes = "0" + minutes;
+			}
+
+			if (seconds < 10) {
+				seconds = "0" + seconds;
+			}
+
+			let clockDiv = document.getElementById('clock');
+			clockDiv.innerText = hours + ":" + minutes + ":" + seconds;
+		}
+
+		function start() {
+			timer = setInterval(function() {
+				time++;
+				displayTime();
+			}, 1000);
+		}
+
+		function stop() {
+			clearInterval(timer);
+		}
+
+		function reset() {
+			clearInterval(timer);
+			time = 0;
+			displayTime();
+		}
+	</script>
+</body>
+</html>
